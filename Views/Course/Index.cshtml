@@ -1,0 +1,48 @@
+@model IEnumerable<_225_cie.Models.Course>
+@using _225_cie.Models
+
+@{
+    ViewData["Title"] = "Course Catalog";
+}
+
+<div class="container mt-4">
+    <h2>Course Catalog</h2>
+    <p class="text-muted">Courses are cached in memory with a 5-minute expiration period.</p>
+
+    <div class="mb-3">
+        <a asp-action="Users" class="btn btn-secondary">External Users (Async Request)</a>
+    </div>
+
+    <table class="table table-bordered table-striped">
+        <thead class="table-dark">
+            <tr>
+                <th>Course ID</th>
+                <th>Course Name</th>
+                <th>Duration</th>
+                <th>Base Fees</th>
+                <th>Discount</th>
+                <th>Final Fees</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var course in Model)
+            {
+                <tr>
+                    <td>@course.CourseId</td>
+                    <td>@course.CourseName</td>
+                    <td>@course.Duration</td>
+                    <td>₹@course.Fees</td>
+                    <td>@course.DiscountPercentage%</td>
+                    <!-- Extension Method invocation -->
+                    <td class="text-success fw-bold">₹@course.CalculateFinalFees()</td>
+                    <td>
+                        <!-- Query string parameter: ?courseId=... -->
+                        <a asp-action="Details" asp-route-courseId="@course.CourseId" class="btn btn-sm btn-info">Details</a>
+                        <a asp-action="Enroll" asp-route-courseId="@course.CourseId" class="btn btn-sm btn-primary">Enroll</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,13 @@
+@{
+    ViewData["Title"] = "Enrollment Confirmed";
+}
+
+<div class="container mt-4">
+    <div class="alert alert-success col-md-6">
+        <h3>Enrollment Successful!</h3>
+        <hr />
+        <p><strong>Student Name (from Cookie):</strong> @ViewBag.StudentName</p>
+        <p><strong>Selected Course (from Session):</strong> @ViewBag.SelectedCourse</p>
+    </div>
+    <a asp-action="Index" class="btn btn-primary">Return to Catalog</a>
+</div>

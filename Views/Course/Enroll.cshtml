@@ -1,0 +1,30 @@
+@model _225_cie.Models.Course
+
+@{
+    ViewData["Title"] = "Enrollment Form";
+}
+
+<div class="container mt-4">
+    <h2>Course Enrollment</h2>
+    <div class="card p-4 col-md-6 shadow-sm">
+        <form asp-action="Enroll" method="post">
+            <!-- Hidden field used to submit CourseId -->
+            <input type="hidden" name="courseId" value="@Model.CourseId" />
+            <input type="hidden" name="courseName" value="@Model.CourseName" />
+
+            <div class="mb-3">
+                <label class="form-label">Course</label>
+                <input type="text" class="form-control" value="@Model.CourseName" readonly />
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Student Name</label>
+                <!-- Pre-filled from Cookie if present -->
+                <input type="text" name="studentName" class="form-control" value="@ViewBag.StudentName" required />
+            </div>
+
+            <button type="submit" class="btn btn-success">Submit Enrollment</button>
+            <a asp-action="Index" class="btn btn-link">Cancel</a>
+        </form>
+    </div>
+</div>
